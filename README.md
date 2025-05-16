@@ -209,8 +209,6 @@ test_bzero() {
         "Primeros 3 bytes a cero (ASCII)" "000108111"
 }
 
-
-
 test_strlen() {
     print_header "ft_strlen"
     run_test "test_strlen1" \
@@ -271,7 +269,6 @@ test_strdup() {
         '#include "libft.h"\n#include <stdio.h>\n#include <string.h>\nint main() { char *dup = ft_strdup("Hola"); printf("%s", dup); free(dup); }' \
         "Duplicar cadena" "Hola"
 }
-
 
 test_toupper() {
     print_header "ft_toupper"
@@ -479,15 +476,12 @@ test_lstadd_front() {
         "Añadir nodo al frente" "uno"
 }
 
-
 test_lstsize() {
     print_header "ft_lstsize"
     run_test "test_lstsize1" \
         '#include "libft.h"\n#include <stdio.h>\n#include <stdlib.h>\nint main() { t_list *n1 = ft_lstnew("uno"); t_list *n2 = ft_lstnew("dos"); t_list *n3 = ft_lstnew("tres"); ft_lstadd_front(&n2, n1); ft_lstadd_front(&n3, n2); printf("%d", ft_lstsize(n3)); ft_lstclear(&n3, NULL); return 0; }' \
         "Contar nodos en la lista" "2"
 }
-
-
 
 test_lstlast() {
     print_header "ft_lstlast"
@@ -502,8 +496,6 @@ test_lstdelone() {
         '#include "libft.h"\n#include <stdio.h>\n#include <string.h>\nvoid del(void *content) { free(content); }\nint main() { char *str = strdup("bye"); t_list *node = ft_lstnew(str); ft_lstdelone(node, del); printf("OK"); }' \
         "Eliminar un nodo" "OK"
 }
-
-
 
 # ========================================
 # FUNCIÓN run_all_tests
@@ -551,9 +543,6 @@ run_all_tests() {
     test_lstdelone
 }
 
-
-
-
 show_summary() {
     echo -e "\n${CYAN}=== RESUMEN FINAL ===${NC}"
     echo -e "Pruebas pasadas: ${GREEN}$PASSED${NC}"
@@ -579,7 +568,7 @@ main() {
             tail -n 5 $LOG_FILE
             exit 1
         }
-        # Luego añade el bonus
+        # añade el bonus
         make bonus >> $LOG_FILE 2>&1 || {
             echo -e "${RED}Error compilando bonus${NC}"
             echo -e "Verifica que:"
@@ -604,7 +593,7 @@ main() {
         echo -e "${RED}Error: Funciones bonus no encontradas en ${NAME}${NC}"
         exit 1
     fi
-    # Resto del código igual...
+  
     # Ejecutar pruebas
     run_all_tests
     
