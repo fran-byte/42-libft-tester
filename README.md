@@ -1,5 +1,6 @@
 #!/bin/bash
-# ADVERTENCIA !!! Pendinete de corregir el BONUS (debe de compilarse amano, pero aun asi falla)
+
+# Ejecutar ./test.sh -b -v
 
 # Colores
 GREEN="\033[0;32m"
@@ -35,7 +36,7 @@ echo -e "${GREEN}
                @  @         LIBFT Crash-Kraken by fran-byte
 ${NC}"
 
-
+echo -e " Ejecutar ./test.sh -b -v "
 # Colores
 RED="\033[0;31m"
 GREEN="\033[0;32m"
@@ -51,13 +52,16 @@ LOG_FILE="libft_test.log"
 PASSED=0
 FAILED=0
 COMPILE_BONUS=0  
+NAME="libft.a"
+
 
 # Control para compilar bonus
 # Procesar opciones de línea de comandos
-while getopts "v" opt; do
+while getopts "vb" opt; do
     case $opt in
         v) VERBOSE=1 ;;  # Flag para output detallado
-        *) echo "Uso: $0 [-v]" >&2
+        b) COMPILE_BONUS=1;;
+        *) echo "Uso: $0 [-b][-v]" >&2
            exit 1 ;;
     esac
 done
@@ -475,12 +479,15 @@ test_lstadd_front() {
         "Añadir nodo al frente" "uno"
 }
 
+
 test_lstsize() {
     print_header "ft_lstsize"
     run_test "test_lstsize1" \
-        '#include "libft.h"\n#include <stdio.h>\nint main() { t_list *n1 = ft_lstnew("uno"); t_list *n2 = ft_lstnew("dos"); ft_lstadd_front(&n2, n1); printf("%d", ft_lstsize(n1)); free(n1); free(n2); }' \
+        '#include "libft.h"\n#include <stdio.h>\n#include <stdlib.h>\nint main() { t_list *n1 = ft_lstnew("uno"); t_list *n2 = ft_lstnew("dos"); t_list *n3 = ft_lstnew("tres"); ft_lstadd_front(&n2, n1); ft_lstadd_front(&n3, n2); printf("%d", ft_lstsize(n3)); ft_lstclear(&n3, NULL); return 0; }' \
         "Contar nodos en la lista" "2"
 }
+
+
 
 test_lstlast() {
     print_header "ft_lstlast"
@@ -492,7 +499,7 @@ test_lstlast() {
 test_lstdelone() {
     print_header "ft_lstdelone"
     run_test "test_lstdelone1" \
-        '#include "libft.h"\n#include <stdio.h>\nvoid del(void *content) { free(content); }\nint main() { char *str = strdup("bye"); t_list *node = ft_lstnew(str); ft_lstdelone(node, del); printf("OK"); }' \
+        '#include "libft.h"\n#include <stdio.h>\n#include <string.h>\nvoid del(void *content) { free(content); }\nint main() { char *str = strdup("bye"); t_list *node = ft_lstnew(str); ft_lstdelone(node, del); printf("OK"); }' \
         "Eliminar un nodo" "OK"
 }
 
@@ -588,6 +595,9 @@ main() {
             exit 1
         }
     fi
+
+    echo "Nombre del archivo: ${NAME}"
+
     
     # Verificación final de que se compiló correctamente
     if [ $COMPILE_BONUS -eq 1 ] && ! nm ${NAME} | grep -q "ft_lst"; then
