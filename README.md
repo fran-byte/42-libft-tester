@@ -1,15 +1,15 @@
 **Quick Setup**
 
-1. **Download** the `lift-tester.sh` script.
+1. **Download** the `libft-tester.sh` script.
 2. **Make it executable**:
 
    ```bash
-   chmod +x lift-tester.sh  
+   chmod +x libft-tester.sh  
    ```
 3. **Run it** from your project folder:
 
    ```bash
-   ./lift-tester.sh  
+   ./libft-tester.sh
    ```
 
 
