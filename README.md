@@ -1,5 +1,15 @@
-Download the .sh file,
+**Quick Setup**
 
-give it execution privileges,
+1. **Download** the `lift-tester.sh` script.
+2. **Make it executable**:
 
-and run it inside your project folder: ./lift-tester.sh
+   ```bash
+   chmod +x lift-tester.sh  
+   ```
+3. **Run it** from your project folder:
+
+   ```bash
+   ./lift-tester.sh  
+   ```
+
+
